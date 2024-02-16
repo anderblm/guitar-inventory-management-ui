@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Guitar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            background-color: red; /* Set background color to red */
+        }
+
+        .container {
+            text-align: center;
+            max-width: 600px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #fff; /* Set container background color to white */
+        }
+
+        label {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: orange; /* Set button background color to orange */
+            color: white;
+            padding: 15px 20px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            float: right;
+        }
+
+        .arrow {
+            font-size: 2rem;
+            margin: 0 1rem;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <a class="arrow" href="index.html">&lt;</a> <!-- Navigation arrow to go back to the home page -->
+
+    <div class="container">
+        <label for="serialNumber">Serial Number:</label>
+        <input type="text" id="serialNumber" name="serialNumber" required><br>
+
+        <label for="price">Price:</label>
+        <input type="number" id="price" name="price" min="0" required><br>
+
+        <label for="builder">Builder:</label>
+        <input type="text" id="builder" name="builder" required><br>
+
+        <label for="model">Model:</label>
+        <input type="text" id="model" name="model" required><br>
+
+        <label for="type">Type:</label>
+        <select id="type" name="type" required>
+            <option value="Acoustic">Acoustic</option>
+            <option value="Electric">Electric</option>
+            <option value="Bass">Bass</option>
+        </select><br>
+
+        <label for="backWood">Back Wood:</label>
+        <input type="text" id="backWood" name="backWood" required><br>
+
+        <label for="topWood">Top Wood:</label>
+        <input type="text" id="topWood" name="topWood" required><br>
+
+        <button onclick="addGuitar()">Add the guitar</button>
+    </div>
+
+    <script>
+        function addGuitar() {
+            let serialNumber = document.getElementById("serialNumber").value;
+            let price = document.getElementById("price").value;
+            let builder = document.getElementById("builder").value;
+            let model = document.getElementById("model").value;
+            let type = document.getElementById("type").value;
+            let backWood = document.getElementById("backWood").value;
+            let topWood = document.getElementById("topWood").value;
+
+            let guitar = {
+                serialNumber: serialNumber,
+                price: price,
+                builder: builder,
+                model: model,
+                type: type,
+                backWood: backWood,
+                topWood: topWood
+            };
+
+            alert(JSON.stringify(guitar));
+        }
+    </script>
+</body>
+</html>

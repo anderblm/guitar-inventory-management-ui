@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Guitars</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            background-color: blue; /* Set background color to blue */
+        }
+
+        .container {
+            text-align: center;
+            max-width: 600px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #fff; /* Set container background color to white */
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            display: block;
+            width: 100%;
+            text-align: left;
+        }
+
+        input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: green; /* Set button background color to green */
+            color: white;
+            padding: 15px 20px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            align-self: flex-end;
+        }
+
+        .arrow {
+            font-size: 2rem;
+            margin: 10px;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <a class="arrow" href="index.html">&lt;</a> <!-- Navigation arrow to go back to the home page -->
+
+    <div class="container">
+        <label for="builder">Builder:</label>
+        <input type="text" id="builder" name="builder" required>
+
+        <label for="model">Model:</label>
+        <input type="text" id="model" name="model" required>
+
+        <label for="type">Type:</label>
+        <input type="text" id="type" name="type" required>
+
+        <label for="backWood">Back Wood:</label>
+        <input type="text" id="backWood" name="backWood" required>
+
+        <label for="topWood">Top Wood:</label>
+        <input type="text" id="topWood" name="topWood" required>
+
+        <button onclick="searchGuitars()">Search</button>
+    </div>
+
+    <script>
+        function searchGuitars() {
+            let builder = document.getElementById("builder").value;
+            let model = document.getElementById("model").value;
+            let type = document.getElementById("type").value;
+            let backWood = document.getElementById("backWood").value;
+            let topWood = document.getElementById("topWood").value;
+
+            // Perform search logic here
+            alert("Search for guitars with the following criteria:\nBuilder: " + builder + "\nModel: " + model + "\nType: " + type + "\nBack Wood: " + backWood + "\nTop Wood: " + topWood);
+        }
+    </script>
+</body>
+</html>
