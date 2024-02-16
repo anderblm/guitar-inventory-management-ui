@@ -18,21 +18,23 @@
 
         .container {
             text-align: center;
-            max-width: 600px;
+            max-width: 400px; /* Adjusted max-width */
             padding: 20px;
             border: 1px solid #ccc;
             border-radius: 10px;
             background-color: #fff; /* Set container background color to white */
+            position: relative;
         }
 
         label {
             font-size: 1.2rem;
             margin-bottom: 10px;
             display: block;
+            text-align: left;
         }
 
-        input, select {
-            width: 100%;
+        input {
+            width: calc(100% - 20px);
             padding: 10px;
             margin-bottom: 20px;
             font-size: 1.2rem;
@@ -42,22 +44,22 @@
         }
 
         button {
-            background-color: orange; /* Set button background color to orange */
+            background-color: green; /* Set button background color to green */
             color: white;
             padding: 15px 20px;
             font-size: 1.2rem;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            float: right;
+            align-self: flex-end;
         }
 
         .arrow {
             font-size: 2rem;
-            margin: 0 1rem;
+            margin: 10px;
             position: absolute;
-            top: 10px;
-            left: 10px;
+            top: 20px;
+            left: 20px;
             color: white;
             text-decoration: none;
         }
@@ -68,54 +70,62 @@
 
     <div class="container">
         <label for="serialNumber">Serial Number:</label>
-        <input type="text" id="serialNumber" name="serialNumber" required><br>
-
-        <label for="price">Price:</label>
-        <input type="number" id="price" name="price" min="0" required><br>
-
-        <label for="builder">Builder:</label>
-        <input type="text" id="builder" name="builder" required><br>
+        <input type="text" id="serialNumber" name="serialNumber" required>
 
         <label for="model">Model:</label>
-        <input type="text" id="model" name="model" required><br>
+        <input type="text" id="model" name="model" required>
 
         <label for="type">Type:</label>
-        <select id="type" name="type" required>
-            <option value="Acoustic">Acoustic</option>
-            <option value="Electric">Electric</option>
-            <option value="Bass">Bass</option>
-        </select><br>
+        <input type="text" id="type" name="type" required>
+
+        <label for="price">Price:</label>
+        <input type="text" id="price" name="price" required>
+
+        <label for="builder">Builder:</label>
+        <input type="text" id="builder" name="builder" required>
 
         <label for="backWood">Back Wood:</label>
-        <input type="text" id="backWood" name="backWood" required><br>
+        <input type="text" id="backWood" name="backWood" required>
 
         <label for="topWood">Top Wood:</label>
-        <input type="text" id="topWood" name="topWood" required><br>
+        <input type="text" id="topWood" name="topWood" required>
 
-        <button onclick="addGuitar()">Add the guitar</button>
+        <button onclick="addGuitar()">Add Guitar</button> <!-- Call addGuitar() function on button click -->
     </div>
 
     <script>
+        const inventory = [];
+
         function addGuitar() {
             let serialNumber = document.getElementById("serialNumber").value;
-            let price = document.getElementById("price").value;
-            let builder = document.getElementById("builder").value;
             let model = document.getElementById("model").value;
             let type = document.getElementById("type").value;
+            let price = document.getElementById("price").value;
+            let builder = document.getElementById("builder").value;
             let backWood = document.getElementById("backWood").value;
             let topWood = document.getElementById("topWood").value;
 
             let guitar = {
                 serialNumber: serialNumber,
-                price: price,
-                builder: builder,
                 model: model,
                 type: type,
+                price: price,
+                builder: builder,
                 backWood: backWood,
                 topWood: topWood
             };
 
-            alert(JSON.stringify(guitar));
+            inventory.push(guitar);
+            
+            alert("Guitar added successfully!");
+            
+            document.getElementById("serialNumber").value = "";
+            document.getElementById("model").value = "";
+            document.getElementById("type").value = "";
+            document.getElementById("price").value = "";
+            document.getElementById("builder").value = "";
+            document.getElementById("backWood").value = "";
+            document.getElementById("topWood").value = "";
         }
     </script>
 </body>
