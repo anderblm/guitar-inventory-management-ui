@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Guitar</title>
     <style>
+        /* CSS styles for Add page */
         body {
             font-family: Arial, sans-serif;
             display: flex;
@@ -66,8 +67,10 @@
     </style>
 </head>
 <body>
-    <a class="arrow" href="index.html">&lt;</a> <!-- Navigation arrow to go back to the home page -->
+    <!-- Navigation arrow to go back to the home page -->
+    <a class="arrow" href="index.html">&lt;</a>
 
+    <!-- Add Guitar Form Container -->
     <div class="container">
         <label for="serialNumber">Serial Number:</label>
         <input type="text" id="serialNumber" name="serialNumber" required>
@@ -90,12 +93,12 @@
         <label for="topWood">Top Wood:</label>
         <input type="text" id="topWood" name="topWood" required>
 
-        <button onclick="addGuitar()">Add Guitar</button> <!-- Call addGuitar() function on button click -->
+        <!-- Add Guitar Button -->
+        <button onclick="addGuitar()">Add Guitar</button>
     </div>
 
+    <!-- Script for Add Guitar functionality -->
     <script>
-        const inventory = [];
-
         function addGuitar() {
             let serialNumber = document.getElementById("serialNumber").value;
             let model = document.getElementById("model").value;
@@ -105,7 +108,14 @@
             let backWood = document.getElementById("backWood").value;
             let topWood = document.getElementById("topWood").value;
 
-            let guitar = {
+            // Check if any field is empty
+            if (!serialNumber || !model || !type || !price || !builder || !backWood || !topWood) {
+                alert("Please fill in all fields.");
+                return;
+            }
+
+            // Prepare data to send to backend API
+            let guitarData = {
                 serialNumber: serialNumber,
                 model: model,
                 type: type,
@@ -115,10 +125,27 @@
                 topWood: topWood
             };
 
-            inventory.push(guitar);
-            
-            alert("Guitar added successfully!");
-            
+            // Send data to backend API
+            fetch('your_backend_api_url/add_guitar', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(guitarData),
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert("The guitar was added to the system.");
+                } else {
+                    alert("Something went wrong. Please try again or contact the customer support team.");
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert("Something went wrong. Please try again or contact the customer support team.");
+            });
+
+            // Clear input fields
             document.getElementById("serialNumber").value = "";
             document.getElementById("model").value = "";
             document.getElementById("type").value = "";

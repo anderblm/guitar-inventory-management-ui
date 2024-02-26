@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Guitar</title>
     <style>
+        /* CSS styles for Search page */
         body {
             font-family: Arial, sans-serif;
             display: flex;
@@ -89,8 +90,10 @@
     </style>
 </head>
 <body>
-    <a class="arrow" href="index.html">&lt;</a> <!-- Navigation arrow to go back to the home page -->
+    <!-- Navigation arrow to go back to the home page -->
+    <a class="arrow" href="index.html">&lt;</a>
 
+    <!-- Search Guitar Form Container -->
     <div class="container">
         <label for="builder">Builder:</label>
         <input type="text" id="builder" name="builder" placeholder="Enter Builder">
@@ -107,20 +110,15 @@
         <label for="topWood">Top Wood:</label>
         <input type="text" id="topWood" name="topWood" placeholder="Enter Top Wood">
 
-        <button onclick="searchGuitars()">Search Guitars</button> <!-- Call searchGuitars() function on button click -->
+        <!-- Search Guitar Button -->
+        <button onclick="searchGuitars()">Search Guitars</button>
 
-        <div id="searchResult"></div> <!-- Display search result here -->
+        <!-- Display search result here -->
+        <div id="searchResult"></div>
     </div>
 
+    <!-- Script for Search Guitar functionality -->
     <script>
-        const inventory = [
-            { serialNumber: "12345", model: "Stratocaster", type: "Electric", price: "$1000", builder: "Fender", backWood: "Maple", topWood: "Alder" },
-            { serialNumber: "54321", model: "Les Paul", type: "Electric", price: "$1500", builder: "Gibson", backWood: "Mahogany", topWood: "Maple" },
-            { serialNumber: "67890", model: "Dreadnought", type: "Acoustic", price: "$800", builder: "Martin", backWood: "Rosewood", topWood: "Spruce" },
-            { serialNumber: "09876", model: "Telecaster", type: "Electric", price: "$1200", builder: "Fender", backWood: "Ash", topWood: "Maple" },
-            { serialNumber: "13579", model: "SG", type: "Electric", price: "$1100", builder: "Gibson", backWood: "Mahogany", topWood: "Mahogany" }
-        ];
-
         function searchGuitars() {
             const builder = document.getElementById("builder").value.toLowerCase();
             const model = document.getElementById("model").value.toLowerCase();
@@ -128,17 +126,30 @@
             const backWood = document.getElementById("backWood").value.toLowerCase();
             const topWood = document.getElementById("topWood").value.toLowerCase();
 
-            const searchResult = inventory.filter(guitar => {
-                return (
-                    (builder === '' || guitar.builder.toLowerCase().includes(builder)) &&
-                    (model === '' || guitar.model.toLowerCase().includes(model)) &&
-                    (type === '' || guitar.type.toLowerCase().includes(type)) &&
-                    (backWood === '' || guitar.backWood.toLowerCase().includes(backWood)) &&
-                    (topWood === '' || guitar.topWood.toLowerCase().includes(topWood))
-                );
+            // Prepare query parameters
+            const queryParams = new URLSearchParams({
+                builder: builder,
+                model: model,
+                type: type,
+                backWood: backWood,
+                topWood: topWood
             });
 
-            displaySearchResult(searchResult);
+            // Fetch data from backend API
+            fetch('your_backend_api_url/search_guitars?' + queryParams)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Something went wrong.');
+                }
+                return response.json();
+            })
+            .then(data => {
+                displaySearchResult(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert("Something went wrong. Please try again or contact the customer support team.");
+            });
         }
 
         function displaySearchResult(result) {
